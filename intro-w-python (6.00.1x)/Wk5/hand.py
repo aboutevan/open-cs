@@ -82,7 +82,20 @@ class Hand(object):
         word: string
         returns: Boolean (if the word was or was not made)
         """
+        update = self.hand.copy()
 
+        for l in word:
+            try:
+                update[l] -= 1
+            except KeyError:
+                return False
+
+        for l in update.keys():
+            if update[l] < 0:
+                return False
+
+        self.hand = update
+        return True
 
 myHand = Hand(4)
 print(myHand)
